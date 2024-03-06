@@ -20,12 +20,20 @@ class News(models.Model):
         related_name="news"
     )
 
+    class Meta:
+        verbose_name_plural = "news"
+        ordering = ["-publish_date"]
+
     def __str__(self):
         return f"{self.title} {self.publish_date}"
 
 
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(null=True)
+
+    class Meta:
+        verbose_name = "redactor"
+        verbose_name_plural = "redactors"
 
     def __str__(self):
         return self.username
