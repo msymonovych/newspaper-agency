@@ -11,10 +11,10 @@ class Topic(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
-    topic = models.ManyToManyField(Topic, related_name="news")
+    topics = models.ManyToManyField(Topic, related_name="news")
     publishers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="news"
