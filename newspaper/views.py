@@ -8,6 +8,7 @@ from newspaper.models import News
 
 class NewsListView(generic.ListView):
     model = News
+    paginate_by = 10
 
 
 class NewsDetailView(generic.DetailView):
@@ -33,6 +34,7 @@ class NewsDeleteView(generic.DeleteView):
 
 class RedactorListView(generic.ListView):
     model = News
+    paginate_by = 10
 
 
 class RedactorDetailView(generic.DetailView):
