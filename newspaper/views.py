@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -33,26 +33,26 @@ class NewsDeleteView(generic.DeleteView):
 
 
 class RedactorListView(generic.ListView):
-    model = News
+    model = get_user_model()
     paginate_by = 10
 
 
 class RedactorDetailView(generic.DetailView):
-    model = News
+    model = get_user_model()
 
 
 class RedactorCreateView(generic.CreateView):
-    model = News
+    model = get_user_model()
     form_class = RedactorCreationForm
     success_url = reverse_lazy("newspaper:redactor-list")
 
 
 class RedactorUpdateView(generic.UpdateView):
-    model = News
+    model = get_user_model()
     form_class = RedactorCreationForm
     success_url = reverse_lazy("newspaper:redactor-list")
 
 
 class RedactorDeleteView(generic.DeleteView):
-    model = News
+    model = get_user_model()
     success_url = reverse_lazy("newspaper:news-list")
