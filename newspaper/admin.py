@@ -13,14 +13,14 @@ class RedactorAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
             (
-                 "Additional Information",
-                 {
-                     "fields": (
-                         "first_name",
-                         "last_name",
-                         "years_of_experience",
-                     )
-                 },
+                "Additional Information",
+                {
+                    "fields": (
+                        "first_name",
+                        "last_name",
+                        "years_of_experience",
+                    )
+                },
             ),
         )
     )
