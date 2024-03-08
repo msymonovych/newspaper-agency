@@ -3,7 +3,7 @@ from django.urls import path
 from newspaper import views
 
 urlpatterns = [
-    path("news/", views.NewsListView.as_view(), name="news-list"),
+    path("", views.NewsListView.as_view(), name="news-list"),
     path("news/create/", views.NewsCreateView.as_view(), name="news-create"),
     path("news/<int:pk>/", views.NewsDetailView.as_view(), name="news-detail"),
     path(
