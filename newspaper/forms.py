@@ -1,10 +1,17 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from newspaper.models import News, Redactor
+from newspaper.models import News, Topic
 
 
 class NewsForm(forms.ModelForm):
+    topics = forms.ModelMultipleChoiceField(
+        queryset=Topic.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True
+    )
+
     class Meta:
         model = News
         fields = "__all__"
@@ -12,7 +19,7 @@ class NewsForm(forms.ModelForm):
 
 class RedactorCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        model = Redactor
+        model = get_user_model()
         fields = UserCreationForm.Meta.fields + (
             "first_name",
             "last_name",
