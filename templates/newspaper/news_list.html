@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% block search %}
+  {% include "includes/search.html" %}
+{% endblock %}
+
+<ul>
+{% for news in news_list %}
+<a class="text-decoration-none" href="{% url 'newspaper:news-detail' pk=news.id%}">
+<div class="card mb-2 text-body">
+
+  <div class="card-header">
+    Test Header
+  </div>
+  
+  <div class="card-body">
+    <p class="card-text">{{ news.content|truncatewords:50 }}</p>
+  </div>
+
+  <div class="card-footer text-secondary">
+    <strong class="">Published by</strong>
+    {% for publisher in news.publishers.all %}
+      {{ publisher.username }}
+    {% endfor %}
+  </div>
+</div>
+</a>
+{% endfor %}
+</ul>
+{% endblock %}
