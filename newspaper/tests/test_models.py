@@ -4,6 +4,7 @@ from newspaper.models import Topic, Redactor, News
 
 
 class ModelsTest(TestCase):
+
     def setUp(self):
         self.topic = Topic.objects.create(name="testTopic")
         self.redactor = Redactor.objects.create(

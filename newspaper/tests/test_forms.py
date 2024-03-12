@@ -4,6 +4,7 @@ from newspaper.forms import RedactorCreationForm
 
 
 class FormsTest(TestCase):
+
     def test_redactor_creation_form(self):
         test_password = "testPass1"
         form_data = {

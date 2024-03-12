@@ -6,6 +6,7 @@ from newspaper.models import Redactor
 
 
 class AdminTest(TestCase):
+
     def setUp(self):
         self.password = "testPass1"
         self.admin_user = get_user_model().objects.create_superuser(

@@ -26,6 +26,7 @@ urls = {
 
 
 class PublicViewTests(TestCase):
+
     def setUp(self):
         self.topic = Topic.objects.create(
             name="Test Topic"
@@ -164,6 +165,7 @@ class PublicViewTests(TestCase):
 
 
 class PrivateViewTests(TestCase):
+
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username="test",
