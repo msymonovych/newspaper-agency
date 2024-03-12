@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ redactor.username }}
+    {% if user.username == redactor.username %}
+      <a href="{% url 'newspaper:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
+  
+      <a href="{% url 'newspaper:redactor-update' pk=redactor.id %}" class="btn btn-secondary link-to-page">
+        Update
+      </a>
+    {% endif %}
+  </h1>
+
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+  <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+  <div class="ml-3">
+    <h4>News</h4>
+
+    {% for news in redactor.news.all %}
+        <hr>
+        <p><strong>Title:</strong> {{ news.title }}</p>
+        <p><strong>Publish date:</strong> {{ news.publish_date }}</p>
+      
+        <p class="text-muted"><strong>All publishers:</strong>
+          {% for publisher in news.publishers.all %}
+            {{ publisher.first_name }} {{ publisher.last_name }}
+          {% endfor %}
+        </p>
+      
+        <p class="text-muted"><strong>Topics:</strong>
+          {% for topic in news.topic.all %}
+            {{ topic.name }}
+          {% endfor %}
+        </p>
+
+    {% empty %}
+      <p>No news!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="d-flex d-flex-row">
+    <h1>
+      {{ news.title }}
+    </h1>
+    <div class="p-2 justify-content-end">
+    {% if user in news.publishers.all %}
+      <a href="{% url 'newspaper:news-delete' pk=news.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
+      
+      <a href="{% url 'newspaper:news-update' pk=news.id %}" class="btn btn-secondary link-to-page">
+        Update
+      </a>
+    {% endif %}
+    </div>
+  </div>
+  <p>
+    Publish date: 
+    {{ news.publish_date }}
+  </p>
+  <p>
+    Publishers:
+    {% for publisher in news.publishers.all %}
+      {{ publisher.username }}
+    {% endfor %}
+  </p>
+
+  <hr>
+  <div>
+    {{ news.content }}
+  </div>
+
+{% endblock %}
