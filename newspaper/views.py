@@ -7,9 +7,9 @@ from newspaper.forms import (
     NewsForm,
     RedactorCreationForm,
     NewsSearchForm,
-    RedactorSearchForm
+    RedactorSearchForm, RedactorUpdateForm
 )
-from newspaper.models import News
+from newspaper.models import News, Topic
 
 
 class NewsListView(generic.ListView):
@@ -21,15 +21,22 @@ class NewsListView(generic.ListView):
         context["search_form"] = NewsSearchForm(
             initial={"title": title}
         )
+        context["topic_list"] = Topic.objects.all()
+
         return context
 
     def get_queryset(self):
         queryset = News.objects.all()
         form = NewsSearchForm(self.request.GET)
+        topic = self.request.GET.get("topic")
         if form.is_valid():
+            if topic:
+                queryset = queryset.filter(topics__name=topic)
+
             queryset = queryset.filter(
                 title__icontains=form.cleaned_data["title"]
             )
+
         return queryset
 
 
@@ -63,6 +70,7 @@ class RedactorListView(generic.ListView):
         context["search_form"] = RedactorSearchForm(
             initial={"username": username}
         )
+
         return context
 
     def get_queryset(self):
@@ -72,6 +80,7 @@ class RedactorListView(generic.ListView):
             queryset = queryset.filter(
                 username__icontains=form.cleaned_data["username"]
             )
+
         return queryset
 
 
@@ -79,7 +88,7 @@ class RedactorDetailView(generic.DetailView):
     model = get_user_model()
 
 
-class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+class RedactorCreateView(generic.CreateView):
     model = get_user_model()
     form_class = RedactorCreationForm
     success_url = reverse_lazy("newspaper:redactor-list")
@@ -87,7 +96,7 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = get_user_model()
-    form_class = RedactorCreationForm
+    form_class = RedactorUpdateForm
     success_url = reverse_lazy("newspaper:redactor-list")
 
 

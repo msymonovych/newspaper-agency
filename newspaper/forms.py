@@ -27,6 +27,17 @@ class RedactorCreationForm(UserCreationForm):
         )
 
 
+class RedactorUpdateForm(forms.ModelForm):
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "years_of_experience"
+        )
+
+
 class RedactorSearchForm(forms.Form):
     username = forms.CharField(
         max_length=30,
