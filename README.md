@@ -6,17 +6,46 @@ Django project for creating and sharing news
 
 [Newspaper Agency project deployed to Render](https://newspaper-agency-853b.onrender.com)
 
+You can use this test user
+```
+login: user
+password: user12345
+```
+
 ## Installation
 
-Python3 mush be already installed
+Python 3 must be already installed
+
+### Clone git repository
 
 ```shell
 git clone https://github.com/msymonovych/newspaper-agency
 cd newspaper_agency
+```
+
+### Create virtual environment and install dependencies
+
+for unix
+```shell
 python3 -m venv venv
 source venv/bin/acitvate
+pip3 install -r requirements.txt
+```
+for windows
+```shell
+python -m venv venv
+venv\Scripts\acitvate
 pip install -r requirements.txt
-python manage.py runserver  # starts Django Server
+```
+
+### Migrations
+```shell
+python manage.py makemigrations
+python manage.py migrate
+```
+### Start Django server
+```shell
+python manage.py runserver
 ```
 
 ## Features
@@ -27,4 +56,4 @@ python manage.py runserver  # starts Django Server
 
 ## Demo
 
-![demo](https://github.com/msymonovych/newspaper-agency/assets/87976005/8566986d-ac9f-46ff-8cda-22c845a724fd)
+![demo](https://github.com/msymonovych/newspaper-agency/assets/87976005/9db3351e-2d30-469d-8871-aea6581033f9)
