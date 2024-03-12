@@ -22,6 +22,7 @@ class NewsListView(generic.ListView):
             initial={"title": title}
         )
         context["topic_list"] = Topic.objects.all()
+
         return context
 
     def get_queryset(self):
@@ -29,13 +30,13 @@ class NewsListView(generic.ListView):
         form = NewsSearchForm(self.request.GET)
         topic = self.request.GET.get("topic")
         if form.is_valid():
-
             if topic:
                 queryset = queryset.filter(topics__name=topic)
 
             queryset = queryset.filter(
                 title__icontains=form.cleaned_data["title"]
             )
+
         return queryset
 
 
@@ -69,6 +70,7 @@ class RedactorListView(generic.ListView):
         context["search_form"] = RedactorSearchForm(
             initial={"username": username}
         )
+
         return context
 
     def get_queryset(self):
@@ -78,6 +80,7 @@ class RedactorListView(generic.ListView):
             queryset = queryset.filter(
                 username__icontains=form.cleaned_data["username"]
             )
+
         return queryset
 
 
